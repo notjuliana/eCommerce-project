@@ -6,12 +6,12 @@ export default class Footer extends Component {
             
         return (
            <div style={{
-               
+                        position: 'absolute',
+                        bottom: '0',
                         textAlign: 'center',
                         padding: '20px',
                         background: '#2D2D2D',
-                        bottom: '0',
-                        marginTop: '50px',
+                        
                         width: '100%'    
                }}>
                <h4 style={{color: '#fff'}}>

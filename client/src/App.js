@@ -5,12 +5,11 @@ import './App.css'
 import Navbar from './components//Navigation Bar/Navbar'
 import ProductList  from './components/ProductList'
 import Detail  from './components/Detail'
-import Cart   from './components/Cart/Cart'
 import Default from './components/Default'
-import PopUp from './components/PopUp'
 import Login from './components//Login/Login'
 import Register from './components/Login/Register'
 import Footer from './components/Footer'
+import Cart from './components/Cart/Cart';
 
 
 
@@ -27,8 +26,8 @@ export class App extends Component {
                     <Route exact path='/users/register' component={Register} />
                     <Route component={Default} />
                 </Switch>
-                <PopUp />
-                <Footer />
+               
+                
             </div>
         )
     }

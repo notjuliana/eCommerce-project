@@ -25,7 +25,9 @@ const drawerWidth = '100%';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+
     display: 'flex',
+    marginBottom: '60px'
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -104,13 +106,23 @@ const useStyles = makeStyles((theme) => ({
   button: {
     cursor: 'pointer',
     border: 'none',
+    background: 'transparent'
+  },
+  nav: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'relative',
+    width: '100%'
   },
   title: {
     fontFamily: 'Yeseva One',
     alignItems: 'center',
     padding: '10px',
     textDecoration: 'none',
-    color: '#2D2D2D'
+    color: '#2D2D2D', 
+    display: 'block',
+    margin: '0 auto' 
   },
   count: {
     fontSize: '12px',
@@ -123,14 +135,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginTop: '-10px'
   },
-  cart: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
   cartIcon: {
-    right: '0',
+    alignItems: 'center',
+    
+    
   }
+
  
 }));
 
@@ -172,17 +182,17 @@ export default function PersistentDrawerLeft() {
             {value => {
                 const { count } = value.detailProduct;
             return (
-              <div className={classes.cart}>
-                <div className={classes.cart}>
-                <Link to='/'  style={{textDecoration: 'none', margin: '0 auto'}}>
+              <div className={classes.nav}>
+                <div>
+                <Link to='/'  style={{textDecoration: 'none'}}>
                 <Typography variant="h4" className={classes.title}>
                   Coffee Shop
                 </Typography>
                 </Link>
                 </div>
-                <div className={classes.cartIcon}>
+                <div>
                 <Link to='/cart' style={{color: '#2D2D2D'}}>
-                <ShoppingCartIcon />
+                <ShoppingCartIcon className={classes.cartIcon}/>
                 <span className={classes.count}>{count}</span> 
                 </Link>
                 </div>

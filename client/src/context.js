@@ -44,7 +44,7 @@ class ProductProvider extends Component {
       const index = tempProducts.indexOf(this.getItem(id));
       const product = tempProducts[index];
       product.inCart = true;
-      product.count = 1;
+      product.count++;
       const price = product.price;
       product.total = price;
   
@@ -102,20 +102,14 @@ class ProductProvider extends Component {
       }
     };
     getTotals = () => {
-      // const subTotal = this.state.cart
-      //   .map(item => item.total)
-      //   .reduce((acc, curr) => {
-      //     acc = acc + curr;
-      //     return acc;
-      //   }, 0);
+      
       let subTotal = 0;
       this.state.cart.map(item => (subTotal += item.total));
-      const tempTax = subTotal * 0.1;
-      const tax = parseFloat(tempTax.toFixed(2));
-      const total = subTotal + tax;
+      const shipping = 9.90;
+      const total = subTotal + shipping;
       return {
         subTotal,
-        tax,
+        shipping,
         total
       };
     };
@@ -125,7 +119,7 @@ class ProductProvider extends Component {
         () => {
           return {
             cartSubTotal: totals.subTotal,
-            cartTax: totals.tax,
+            cartShipping: totals.shipping,
             cartTotal: totals.total
           };
         },

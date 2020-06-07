@@ -14,8 +14,6 @@ export default class ProductList extends Component {
       return (
         <React.Fragment>
           <Card >
-            <div >
-              
               <div className="container">
                 <ProductConsumer>
                   { value => {
@@ -25,7 +23,6 @@ export default class ProductList extends Component {
                   }}
                 </ProductConsumer>
               </div>
-            </div>
           </Card>
         </React.Fragment>
       );
