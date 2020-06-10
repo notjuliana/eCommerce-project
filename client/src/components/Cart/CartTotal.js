@@ -14,7 +14,7 @@ export default class CartTotals extends Component {
         {!emptyCart && (
           <TotalCart>
           <div className="totalContainer">
-              <div>
+              
                   <div className="subtotal left"> Subtotal: </div>
                   <div className="right">€ {cartSubTotal} </div>
 
@@ -23,7 +23,7 @@ export default class CartTotals extends Component {
                   
                   <div className="total left"><strong> Total: </strong></div>
                   <div className="total right"><strong>€ {cartTotal} </strong></div>
-              </div>    
+     
           </div>
           </TotalCart>
         )}
@@ -36,7 +36,7 @@ const TotalCart = styled.div `
 .totalContainer {
     font-size: 20px;
     display: block;
-    margin: 20px;
+    margin: 50px;
 }
 .left {
   float: left;
@@ -45,10 +45,6 @@ const TotalCart = styled.div `
 .right {
   float: right;
   width: 50%;
-}
-.shipping {
-  
-  
 }
 .total {
   margin-top: 50px;

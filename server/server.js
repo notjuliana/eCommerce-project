@@ -1,14 +1,15 @@
+const app = express();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const router = express.Router();
-const path = require("path");
 const passport = require('passport');
 const flash = require('connect-flash');
+const bcrypt = require('bcrypt');
 const session = require('express-session');
 const cors = require('cors');
-const app = express();
+const LocalStrategy = require('passport-local');
 
+const users = []
 const routes = require('./routes/index');
 const users = require('./routes/users');
 
@@ -18,6 +19,8 @@ require('./config/passport')(passport);
  app.use(bodyParser.json());
  app.use(express.json());
  app.use(express.urlencoded({ extended: false }))
+ app.set('view-engine', 'ejs')
+ app.use(flash())
 
  const MONGO_DB = 'mongodb+srv://dbUser:PoPysnRDEXiqi22W@ecommerceproject-noabg.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
@@ -26,12 +29,12 @@ require('./config/passport')(passport);
     .then(() => console.log(`Database connected successfully`))
     .catch(error => console.log(error));
 
-// EJS
-    //app.use(expressLayouts);
-    app.set('view engine', 'ejs');
-   
-
-// Express session
+    const initializePassport = require('./passport-config')
+    initializePassport(
+      passport,
+      email => users.find(user => user.email === email),
+      id => users.find(user => user.id === id)
+    )
   app.use(
     session({
       secret: 'secret',
@@ -40,9 +43,23 @@ require('./config/passport')(passport);
     })
   );
   
-// Passport middleware
-  app.use(passport.initialize());
-  app.use(passport.session());
+// Passport 
+app.use(require("express-session")({
+  secret: "passport example",
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.get('/',(req,res)=>{
+      if(req.user){
+              res.send(req.user)
+      }
+})
   
 // Connect flash
   app.use(flash());

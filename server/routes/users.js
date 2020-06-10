@@ -7,11 +7,36 @@ const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
 
 // Login Page
-router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
+app.get('/login',(req,res)=>{
+  res.render('login.js')
+})
+//handling login logic
+app.post("/login", passport.authenticate("local",
+{
+  successRedirect: "/",
+  failureRedirect: "/login",
+}), function(req, res){
+});
 
 // Register Page
-router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
-
+app.get("/register", function(req, res){
+  res.render("register.js"); 
+});
+app.post("/register", function(req, res){
+   var newUser = new User({
+               username: req.body.username
+       });
+   User.register(newUser, req.body.password, function(err, user){
+       if(err){
+           console.log("error", err.message);
+           return res.redirect("/register");
+       }
+       passport.authenticate("local")(req, res, function(){
+                       console.log("success", "you have successfully registered as  " + user.username);
+          res.redirect("/"); 
+       });
+   });
+});
 // Register
 router.post('/register', (req, res) => {
   const { name, email, password, password2 } = req.body;
@@ -86,10 +111,11 @@ router.post('/login', (req, res, next) => {
 });
 
 // Logout
-router.get('/logout', (req, res) => {
+app.get("/logout", (req, res)=>{
   req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+      console.log("success", "You have successfully logged out ");
+  res.redirect("/login");
 });
+
 
 module.exports = router;

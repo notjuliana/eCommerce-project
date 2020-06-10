@@ -48,7 +48,7 @@ export default class CartItem extends Component {
           </strong>
         </div>
 
-          <div className="cart-icon" onClick={() => removeItem(id)}>
+          <div className="cartIcon" onClick={() => removeItem(id)}>
             <DeleteIcon />
           </div>
         </div>
@@ -66,29 +66,29 @@ const CartDetail = styled.div `
   align-items: center;
   max-width: 100%;
 }
-.grid {
-  
-}
+
 img {
   display: block;
   width: 150px;
   margin: 0 auto;
 }
+
 .title {
   font-size: 20px;
   padding: 5px;
 }
+
 .description {
   font-size: 15px;
   padding: 5px;
 }
+
 .quantity {
   border: 2px solid #2D2D2D;
   width: 100px;
   font-size: 20px;
   padding: 5px;
   margin: 10px;
-  
 }
 .quantity span {
   padding: 7px;
@@ -97,7 +97,7 @@ img {
   font-size: 20px;
   right: 0;
 }
-.cart-icon {
+.cartIcon {
   position: absolute;
   display: block;
   right: 0;
@@ -105,8 +105,8 @@ img {
 }
 @media (max-width: 450px) {
   .containerProduct {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
    img {
     display: flex;
@@ -119,19 +119,19 @@ img {
     font-size: 12px;
   }
   .grid3 {
+   display: block;
     
   }
   .price {
     font-size: 15px;
-    display: block;
     position: relative;
-    top: 0px;
+    top: 0;
   }
-  .cart-icon {
+  
+  .cartIcon {
     position: absolute;
     display: block;
-    
-    bottom: 0px;
+    bottom: 0;
   }
 
 
